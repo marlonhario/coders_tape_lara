@@ -1,0 +1,60 @@
+CMD:
+	php artisan make:auth
+
+	to use events:	
+		: php artisan make:event NewCustomerHasRegisteredEvent
+		: php artisan event:generate
+		: php artisan make:listener WelcomeNewCustomerListener (optional)
+		add your event's at the C:\xampp-7.3\htdocs\sample_lara_\app\Providers\EventServiceProvider.php
+
+	use mail:
+		create account on mailgun(for production) or mailtrap
+		setup .env for mail
+		: php artisan make:mail ContactFormMail --markdown=emails.contact.contact-form
+		: php artisan make:mail WelcomeNewUserMail --markdown=emails.new-welcome
+
+	use middleware:
+		php artisan make:middleware TestMiddleware	
+		setup - C:\xampp-7.3\htdocs\sample_lara_\app\Http\Kernel.php
+
+	use Queues: Database Driver:
+		implement ShouldQueue in your listener
+		C:\xampp-7.3\htdocs\sample_lara_\config\queue.php (for several drivers)
+		setup .env for QUEUE_CONNECTION = database ( use database driver or redis for production)
+		: php artisan queue:table
+		: php artisan migrate
+		: php artisan queue:work
+		: php artisan queue:work &   (run worker at background)
+		: jobs  (to check if working is running)
+		: jobs -l
+		: KILL 29008
+		: php artisan queue:work > storage/logs/jobs.log & (better)
+
+
+	use factories / seeder
+		using tinker:
+			: factory(\App\User::class)->create();
+			: factory(\App\User::class, 3)->create();
+		creating factory
+			: php artisan make:factory CompanyFactory -m Company	
+			- customize C:\xampp-7.3\htdocs\sample_lara_\database\factories\CompanyFactory.php
+		database seeder
+			: php artisan make:seeder UsersTableSeeder
+			- add class model C:\xampp-7.3\htdocs\sample_lara_\database\seeds\DatabaseSeeder.php
+			- add factory(\App\User::class, 3)->create(); into run function C:\xampp-7.3\htdocs\sample_lara_\database\seeds\UsersTableSeeder.php
+			: php artisan db:seed
+
+			: php artisan make:factory CustomerFactory (one to relation covered)
+			: php artisan make:seeder CustomersTableSeeder 
+			: php artisan migrate:fresh
+			: php artisan db:seed
+			: composer dump-autoload (if error occur)
+			: php artisan migrate:fresh --seed (shortcut)
+
+	tinker command: 
+		: User::all()->pluck('name');		
+
+	apply: 
+		mailtrap and mailgun - e19
+		setup the env for mail
+		Vue Basics 26,27,28
