@@ -37,6 +37,7 @@ CMD:
 			: factory(\App\User::class, 3)->create();
 		creating factory
 			: php artisan make:factory CompanyFactory -m Company	
+			: php artisan make:factory RoleFactory 	
 			- customize C:\xampp-7.3\htdocs\sample_lara_\database\factories\CompanyFactory.php
 		database seeder
 			: php artisan make:seeder UsersTableSeeder
@@ -52,9 +53,26 @@ CMD:
 			: php artisan migrate:fresh --seed (shortcut)
 
 	tinker command: 
-		: User::all()->pluck('name');		
+		: User::all()->pluck('name');
 
-	apply: 
-		mailtrap and mailgun - e19
-		setup the env for mail
-		Vue Basics 26,27,28
+
+	to link storage dir into public
+		: php artisan storage:link	(for file uploads)
+
+
+	Image Upload: Cropping & Resizing
+		: composer require intervention/image
+
+
+	using telescope
+		: composer require laravel/telescope
+		: php artisan telescope:install
+		: php artisan migrate
+		- http://sample_lara.test/telescope (visit page to show telescope ui)
+
+	using policies
+		: php artisan make:policy CustomerPolicy -m Customer
+		- C:\xampp-7.3\htdocs\sample_lara_\app\Policies\CustomerPolicy.php
+
+	use one to many relation needs a pivot table
+		: php artisan make:migration create_role_user_table --create role_user

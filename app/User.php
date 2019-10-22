@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Phone;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function phone() {
+        return $this->hasOne(Phone::class);
+    }
 
     public function post() {
         // return $this->hasOne('App\Post', 'the_user_id', 'post_id'); //look for diffrent field name
@@ -44,15 +48,19 @@ class User extends Authenticatable
     }
 
     public function posts() {
-        return $this->hasMany('\App\Post');
+        return $this->hasMany(\App\Post::class);
     }
 
-    public function roles() {
-        return $this->belongsToMany('App\Role')->withPivot('created_at');
-        // return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id'); //table_name, user id, role id 
-     }
+    // public function roles() {
+    //     return $this->belongsToMany('App\Role')->withPivot('created_at');
+    //     // return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id'); //table_name, user id, role id 
+    //  }
 
      public function photos() {
         return $this->morphMany('App\Photo', 'imageable');
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)->withTimestamps();
     }
 }

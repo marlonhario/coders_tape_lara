@@ -1720,43 +1720,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37064,131 +37027,46 @@ var render = function() {
     { attrs: { id: "inspire" } },
     [
       _c(
-        "v-card",
+        "v-bottom-navigation",
+        {
+          model: {
+            value: _vm.bottomNav,
+            callback: function($$v) {
+              _vm.bottomNav = $$v
+            },
+            expression: "bottomNav"
+          }
+        },
         [
           _c(
-            "v-navigation-drawer",
-            {
-              attrs: { "expand-on-hover": "", permanent: "" },
-              scopedSlots: _vm._u([
-                {
-                  key: "prepend",
-                  fn: function() {
-                    return [
-                      _c(
-                        "v-list",
-                        [
-                          _c(
-                            "v-list-item",
-                            [
-                              _c(
-                                "v-list-item-avatar",
-                                [
-                                  _c("v-img", {
-                                    attrs: {
-                                      src:
-                                        "https://randomuser.me/api/portraits/women/85.jpg"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item",
-                            { attrs: { link: "", "two-line": "" } },
-                            [
-                              _c(
-                                "v-list-item-content",
-                                [
-                                  _c(
-                                    "v-list-item-title",
-                                    { staticClass: "title" },
-                                    [_vm._v("Sandra Adams")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v("sandra_a88@gmail.com")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item-action",
-                                [_c("v-icon", [_vm._v("mdi-menu-down")])],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  },
-                  proxy: true
-                }
-              ])
-            },
+            "v-btn",
+            { attrs: { value: "recent" } },
             [
+              _c("span", [_vm._v("Recent")]),
               _vm._v(" "),
-              _c("v-divider"),
+              _c("v-icon", [_vm._v("mdi-history")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { attrs: { value: "favorites" } },
+            [
+              _c("span", [_vm._v("Favorites")]),
               _vm._v(" "),
-              _c(
-                "v-list",
-                { attrs: { nav: "", dense: "" } },
-                [
-                  _c(
-                    "v-list-item",
-                    { attrs: { link: "" } },
-                    [
-                      _c(
-                        "v-list-item-icon",
-                        [_c("v-icon", [_vm._v("mdi-folder")])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("My Files")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item",
-                    { attrs: { link: "" } },
-                    [
-                      _c(
-                        "v-list-item-icon",
-                        [_c("v-icon", [_vm._v("mdi-account-multiple")])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Shared with me")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item",
-                    { attrs: { link: "" } },
-                    [
-                      _c(
-                        "v-list-item-icon",
-                        [_c("v-icon", [_vm._v("mdi-star")])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Starred")])
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("v-icon", [_vm._v("mdi-heart")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { attrs: { value: "nearby" } },
+            [
+              _c("span", [_vm._v("Nearby")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("mdi-map-marker")])
             ],
             1
           )

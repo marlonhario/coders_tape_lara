@@ -9,6 +9,7 @@ use App\Events\NewCustomerHasRegisteredEvent;
 use App\Mail\WelcomeNewUserMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class CustomersController extends Controller
 {
@@ -22,7 +23,8 @@ class CustomersController extends Controller
     	// $activeCustomers = Customer::active()->get();
     	// $inactiveCustomers = Customer::inactive()->get();
 
-    	$customers = Customer::all();
+        // $customers = Customer::all();
+    	$customers = Customer::with('company')->paginate(15);  //good approach
     	return view('customers.index', compact('customers'));
     }
 
@@ -35,7 +37,11 @@ class CustomersController extends Controller
 
     public function store() {
 
+        $this->authorize('create', Customer::class);
+
     	$customer = Customer::create($this->validateRequest());
+
+        $this->storeImage($customer);
 
         event(new NewCustomerHasRegisteredEvent($customer));
         // Mail::to($customer->email)->send(new WelcomeNewUserMail());
@@ -62,21 +68,41 @@ class CustomersController extends Controller
 
     	$customer->update($this->validateRequest());
 
+        $this->storeImage($customer);
+
     	return redirect('customers/'. $customer->id);
     }
 
     public function destroy(Customer $customer) {
+        $this->authorize('create', Customer::class);
+        
     	$customer->delete();
 
     	return redirect('customers');
     }
 
     protected function validateRequest() {
-    	return request()->validate([
-    		'name' => 'required|min:3',
-    		'email' => 'required|email',
-    		'active' => 'required',
-    		'company_id' => 'required'
-    	]);	
+
+        return request()->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'active' => 'required',
+            'company_id' => 'required',
+            'image' => 'sometimes|file|image|max:5000'
+        ]);
+
+    }
+
+    private function storeImage($customer) {
+        if(request()->has('image')) {
+            $customer->update([
+                'image' => request()->image->store('uploads', 'public')
+            ]);
+
+            $image = Image::make(public_path('storage/' . $customer->image))->fit(300, 300);
+            // $image = Image::make(public_path('storage/' . $customer->image))->crop(300, 300);
+            // $image = Image::make(public_path('storage/' . $customer->image))->fit(300, 300, null, 'top-left');
+            $image->save();
+        }
     }
 }

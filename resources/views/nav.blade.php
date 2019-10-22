@@ -28,6 +28,23 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">{{ $username }}</a>
 				</li>
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        Relational <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('relational.onetoone') }}">
+                            One to one
+                        </a>
+                        <a class="dropdown-item" href="{{ route('relational.onetomany') }}">
+                            One to many
+                        </a>
+                        <a class="dropdown-item" href="{{ route('relational.manytomany') }}">
+                            Many to many
+                        </a>
+                    </div>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
