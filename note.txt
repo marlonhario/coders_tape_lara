@@ -76,3 +76,12 @@ CMD:
 
 	use one to many relation needs a pivot table
 		: php artisan make:migration create_role_user_table --create role_user
+
+
+
+
+Packages:
+	composer:
+		: composer require intervention/image
+		: composer require laravel/telescope
+		: composer create-project --prefer-dist laravel/laravel blog "5.8.*"

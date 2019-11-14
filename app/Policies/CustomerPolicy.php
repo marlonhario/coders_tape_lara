@@ -32,6 +32,7 @@ class CustomerPolicy
     {
         return in_array($user->email, [
             'sample@gmail.com',
+            'sampleone@gmail.com',
         ]);
     }
 
@@ -45,6 +46,7 @@ class CustomerPolicy
     {
         return in_array($user->email, [
             'sample@gmail.com',
+            'sampleone@gmail.com',
         ]);
     }
 

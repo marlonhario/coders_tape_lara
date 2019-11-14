@@ -2,14 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Model;
 use App\Role;
 use Faker\Generator as Faker;
 
 $factory->define(Role::class, function (Faker $faker) {
-    return (
-    	['name' => 'remove_user'],
-    	['name' => 'add_user'],
-    	['name' => 'comment_user'],
-    	['name' => 'update_user']
-    );	
+    return [
+        
+	        'name' => 'can_edit'
+	    
+    ];
 });

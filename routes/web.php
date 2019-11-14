@@ -12,7 +12,8 @@
 |
 */
 
-Route::view('/', 'home');
+// Route::view('/', 'home');
+Route::get('/', 'HomeController@index');
 
 Route::get('vuetify', 'VuetifyController@index')->name('vuetify.index');
 
@@ -84,17 +85,29 @@ Route::get('contact', 'ContactFormController@create')->name('contact.create');
 Route::post('contact', 'ContactFormController@store')->name('contact.store');
 
 Route::view('about', 'about')->middleware('test');
-Route::get('customers', 'CustomersController@index')->name('customers.index');
-Route::get('customers/create', 'CustomersController@create')->name('customers.create');
-Route::get('customers/{customer}', 'CustomersController@show')->middleware('can:view,customer');
-Route::get('customers/{customer}/edit', 'CustomersController@edit')->name('customers.edit');
-Route::post('customers', 'CustomersController@store')->name('customers.store');
-Route::patch('customers/{customers}', 'CustomersController@update')->name('customers.update')	;
-Route::delete('customers/{customers}', 'CustomersController@destroy')->name('customers.destroy');
+
+
+// Route::get('customers', 'CustomersController@index')->name('customers.index');
+// Route::get('customers/create', 'CustomersController@create')->name('customers.create');
+// Route::get('customers/{customer}', 'CustomersController@show')->middleware('can:view,customer');
+// Route::get('customers/{customer}/edit', 'CustomersController@edit')->name('customers.edit');
+// Route::post('customers', 'CustomersController@store')->name('customers.store');
+// Route::patch('customers/{customers}', 'CustomersController@update')->name('customers.update')	;
+// Route::delete('customers/{customers}', 'CustomersController@destroy')->name('customers.destroy');
 
 // Route::resource('customers', 'CustomersController');
+Route::resource('customers', 'CustomersController')
+    ->middleware('can:customers.view, App\Customer');
 
+// Route::get('doctors/{doctor}/edit', 'DoctorsController@edit')
+//     ->middleware('can:edit-doctor', 'App\Doctor'));
 
+// Route::put('doctors/{doctor}', 'DoctorsController@update')
+//     ->middleware('can:edit-doctor', 'App\Doctor'));
+
+// Route::resource('doctors', 'DoctorsController')
+//     ->except(['edit', 'update'])
+//     ->middleware('can:access-doctors, App\Doctor'));
 
 
 Auth::routes();

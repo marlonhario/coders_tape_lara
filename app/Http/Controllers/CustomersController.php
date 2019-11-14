@@ -15,7 +15,8 @@ class CustomersController extends Controller
 {
 
 	public function __construct() {
-		// $this->middleware('auth')->except(['index']);
+        // $this->middleware('auth')->except(['index']);
+		// $this->middleware('auth')->only(['index']);
 		$this->middleware('auth');
 	}
 
@@ -37,7 +38,7 @@ class CustomersController extends Controller
 
     public function store() {
 
-        $this->authorize('create', Customer::class);
+        $this->authorize('create', Customer::class); //for policy purpose
 
     	$customer = Customer::create($this->validateRequest());
 
